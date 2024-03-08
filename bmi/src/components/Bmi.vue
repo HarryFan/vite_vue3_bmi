@@ -1,76 +1,3 @@
-# vite_vue3_bmi
-vite_安裝vue3製作BMI元件
-建立一個 Vue 3 的 BMI 指數元件使用 Vite 很簡單，跟著以下的步驟就可以完成了：
-
-### 1. 安裝 Vite
-
-首先，你需要有 Node.js 環境。安裝好之後，打開終端機（命令提示字元），然後使用下面的指令來創建一個新的 Vite + Vue 3 專案：
-
-```bash
-npm create vite@latest 你的專案名稱 --template vue
-```
-
-把 `你的專案名稱` 換成你想要的專案名字，例如：`bmi-calculator`。
-
-### 2. 安裝專案依賴
-
-切換到你的專案目錄：
-
-```bash
-cd 你的專案名稱
-```
-
-然後安裝專案依賴：
-
-```bash
-npm install
-```
-
-### 3. 創建 BMI 指數元件
-
-在 `src/components` 資料夾內創建一個名為 `BmiCalculator.vue` 的檔案，並加入以下內容：
-
-```vue
-<template>
-  <div>
-    <h2>BMI 指數計算器</h2>
-    <label for="height">身高（cm）:</label>
-    <input v-model="height" type="number" id="height" />
-    <label for="weight">體重（kg）:</label>
-    <input v-model="weight" type="number" id="weight" />
-    <button @click="calculateBMI">計算 BMI</button>
-    <p v-if="bmi">你的 BMI 是：{{ bmi }}</p>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      height: 0,
-      weight: 0,
-      bmi: null,
-    };
-  },
-  methods: {
-    calculateBMI() {
-      const heightInMeters = this.height / 100;
-      this.bmi = (this.weight / heightInMeters ** 2).toFixed(2);
-    },
-  },
-};
-</script>
-
-<style>
-/* 根據需求添加樣式 */
-</style>
-```
-
-### 4. 在主頁面使用 BMI 元件
-
-打開 `src/App.vue` 檔案，引入並使用你的 `BmiCalculator` 元件：
-
-```vue
 <template>
     <div class="container">
       <h2>BMI 指數計算器</h2>
@@ -86,8 +13,10 @@ export default {
         <button class="btn" @click="calculateBMI">計算 BMI</button>
         <button class="btn" @click="resetFields">重設</button>
       </div>
-      <div v-if="bmi" class="result">
-        <p>你的 BMI 是：{{ bmi }}</p>
+      <div v-if="bmi !== null" class="result">
+        <p v-if="!isNaN(bmi) && !(height === 0 && weight === 0)">你的 BMI 是：{{ bmi }}</p>
+        <p v-else-if="height === 0 && weight === 0">請輸入有效的身高和體重。</p>
+        <p v-else>發生錯誤，請檢查輸入值。</p>
         <p v-if="bmi < 18.5">建議：體重過輕，應適當增加營養攝入。</p>
         <p v-else-if="bmi >= 18.5 && bmi < 24">建議：體重適中，請保持良好的生活方式。</p>
         <p v-else-if="bmi >= 24 && bmi < 27">建議：體重過重，應適當控制飲食並適量運動。</p>
@@ -109,7 +38,8 @@ export default {
   
       const calculateBMI = () => {
         const heightInMeters = height.value / 100
-        bmi.value = (weight.value / (heightInMeters ** 2)).toFixed(2)
+        const result = weight.value / (heightInMeters ** 2)
+        bmi.value = isNaN(result) ? null : result.toFixed(2)
       }
   
       const resetFields = () => {
@@ -129,6 +59,7 @@ export default {
   }
   </script>
   
+ 
   <style>
 .container {
   max-width: 400px;
@@ -178,16 +109,3 @@ input[type="number"] {
   font-weight: bold;
 }
   </style>
-```
-
-### 5. 運行專案
-
-回到終端機，運行以下指令啟動你的專案：
-
-```bash
-npm run dev
-```
-
-現在，你的瀏覽器應該會自動打開 `localhost:5173，並且展示你的 BMI 計算器了！
-
-以上就是用 Vite 建立一個 Vue 3 的 BMI 指數計算器的簡單教學，希望對你有幫助！
