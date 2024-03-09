@@ -32,46 +32,6 @@ npm install
 
 ```vue
 <template>
-  <div>
-    <h2>BMI 指數計算器</h2>
-    <label for="height">身高（cm）:</label>
-    <input v-model="height" type="number" id="height" />
-    <label for="weight">體重（kg）:</label>
-    <input v-model="weight" type="number" id="weight" />
-    <button @click="calculateBMI">計算 BMI</button>
-    <p v-if="bmi">你的 BMI 是：{{ bmi }}</p>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      height: 0,
-      weight: 0,
-      bmi: null,
-    };
-  },
-  methods: {
-    calculateBMI() {
-      const heightInMeters = this.height / 100;
-      this.bmi = (this.weight / heightInMeters ** 2).toFixed(2);
-    },
-  },
-};
-</script>
-
-<style>
-/* 根據需求添加樣式 */
-</style>
-```
-
-### 4. 在主頁面使用 BMI 元件
-
-打開 `src/App.vue` 檔案，引入並使用你的 `BmiCalculator` 元件：
-
-```vue
-<template>
     <div class="container">
       <h2>BMI 指數計算器</h2>
       <div class="input-group">
@@ -178,6 +138,40 @@ input[type="number"] {
   font-weight: bold;
 }
   </style>
+```
+
+### 4. 在主頁面使用 BMI 元件
+
+打開 `src/App.vue` 檔案，引入並使用你的 `BmiCalculator` 元件：
+
+```vue
+<script setup>
+
+import BMI from './components/Bmi.vue'
+
+
+</script>
+
+<template>
+  <BMI/>
+
+</template>
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
+
 ```
 
 ### 5. 運行專案
