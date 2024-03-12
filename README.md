@@ -1,16 +1,27 @@
 # vite_vue3_bmi
 vite_安裝vue3製作BMI元件
-建立一個 Vue 3 的 BMI 指數元件使用 Vite 很簡單，跟著以下的步驟就可以完成了：
+透過Vite來建立一個Vue 3的BMI指數計算器元件非常簡單，只要跟著以下步驟就可以完成：
+
+### 0. 安裝 Node.js
+
+在開始之前，你需要確保已經安裝了Node.js。請前往 [Node.js官方網站](https://nodejs.org/) 下載並安裝適合你作業系統的版本。安裝完成後，你可以在終端機（命令提示字元）中輸入以下指令來確認Node.js和npm（Node.js的套件管理器）已經被正確安裝：
+
+```bash
+node -v
+npm -v
+```
+
+這會顯示出Node.js和npm的版本號，確認你已經安裝好這些工具。
 
 ### 1. 安裝 Vite
 
-首先，你需要有 Node.js 環境。安裝好之後，打開終端機（命令提示字元），然後使用下面的指令來創建一個新的 Vite + Vue 3 專案：
+有了Node.js環境之後，打開終端機（命令提示字元），然後使用下面的指令來創建一個新的Vite + Vue 3專案：
 
 ```bash
 npm create vite@latest 你的專案名稱 --template vue
 ```
 
-把 `你的專案名稱` 換成你想要的專案名字，例如：`bmi-calculator`。
+將 `你的專案名稱` 替換為你想要的專案名字，例如：`bmi-calculator`。
 
 ### 2. 安裝專案依賴
 
@@ -53,7 +64,9 @@ npm install
         <p v-else-if="bmi >= 24 && bmi < 27">建議：體重過重，應適當控制飲食並適量運動。</p>
         <p v-else-if="bmi >= 27 && bmi < 30">建議：屬於輕度肥胖，應積極控制飲食並養成運動習慣。</p>
         <p v-else-if="bmi >= 30 && bmi < 35">建議：屬於中度肥胖，應嚴格控制飲食並持續運動。</p>
-        <p v-else>建議：屬於重度肥胖，應立即尋求專業指導並採取必要措施。</p>
+        <p v-else>建議：屬於重度肥胖，
+
+應立即尋求專業指導並採取必要措施。</p>
       </div>
     </div>
   </template>
@@ -182,6 +195,6 @@ import BMI from './components/Bmi.vue'
 npm run dev
 ```
 
-現在，你的瀏覽器應該會自動打開 `localhost:5173，並且展示你的 BMI 計算器了！
+現在，你的瀏覽器應該會自動打開 `localhost:5173`，並且展示你的BMI計算器了！
 
-以上就是用 Vite 建立一個 Vue 3 的 BMI 指數計算器的簡單教學，希望對你有幫助！
+以上就是使用Vite來建立一個Vue 3的BMI指數計算器的完整教學，希望這對你有所幫助！
